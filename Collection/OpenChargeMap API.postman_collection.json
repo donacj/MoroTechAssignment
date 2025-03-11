@@ -63,6 +63,16 @@
 						"type": "text/javascript",
 						"packages": {}
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.get(\"baseURL\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
 				}
 			],
 			"protocolProfileBehavior": {
@@ -230,9 +240,151 @@
 		},
 		{
 			"name": "Get Reference data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.get(\"baseURL\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test to verify status code.\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Test to verify the response data is in JSON format\r",
+							"pm.test(\"Content type is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"// Test to verify the response time\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"//\r",
+							"// Schema validation\r",
+							"pm.test(\"Response contains array of ChargerTypes with ID and Title fields\", function () {\r",
+							"    const chargerTypes = pm.response.json().ChargerTypes;\r",
+							"    chargerTypes.forEach((charger) => {\r",
+							"        pm.expect(charger).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(charger).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains array of StatusTypes with ID and Title fields\", function () {\r",
+							"    const statusTypes = pm.response.json().StatusTypes;\r",
+							"    statusTypes.forEach((status) => {\r",
+							"        pm.expect(status).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(status).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains array of CheckinStatusTypes with ID and Title fields\", function () {\r",
+							"    const checkinStatusTypes = pm.response.json().CheckinStatusTypes;\r",
+							"    checkinStatusTypes.forEach((checkinStatus) => {\r",
+							"        pm.expect(checkinStatus).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(checkinStatus).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains array of ConnectionTypes with ID and Title fields\", function () {\r",
+							"    const connectionTypes = pm.response.json().ConnectionTypes;\r",
+							"    connectionTypes.forEach((connection) => {\r",
+							"        pm.expect(connection).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(connection).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains array of CurrentTypes with ID and Title fields\", function () {\r",
+							"    const currentTypes = pm.response.json().CurrentTypes;\r",
+							"    currentTypes.forEach((current) => {\r",
+							"        pm.expect(current).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(current).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains array of DataProviders with ID and Title fields\", function () {\r",
+							"    const dataProviders = pm.response.json().DataProviders;\r",
+							"    dataProviders.forEach((dataProvider) => {\r",
+							"        pm.expect(dataProvider).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(dataProvider).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains array of Operators with ID and Title fields\", function () {\r",
+							"    const operators = pm.response.json().Operators;\r",
+							"    operators.forEach((operator) => {\r",
+							"        pm.expect(operator).to.have.property('ID').that.is.a('number');\r",
+							"        pm.expect(operator).to.have.property('Title').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//business logic(fast and slow)\r",
+							"pm.test(\"ChargerTypes contains objects with IsFastChargeCapable true and false\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    const chargerTypes = jsonData.ChargerTypes;\r",
+							"\r",
+							"    // Check for at least one object with IsFastChargeCapable: true\r",
+							"    const hasFastCharge = chargerTypes.some(charger => charger.IsFastChargeCapable === true);\r",
+							"    pm.expect(hasFastCharge).to.be.true;\r",
+							"\r",
+							"    // Check for at least one object with IsFastChargeCapable: false\r",
+							"    const hasSlowCharge = chargerTypes.some(charger => charger.IsFastChargeCapable === false);\r",
+							"    pm.expect(hasSlowCharge).to.be.true;\r",
+							"});\r",
+							"\r",
+							"//business logic(unique ID)\r",
+							"\r",
+							"function isADuplicate(id){\r",
+							"    return id.length !== (new Set(id)).size; \r",
+							"}\r",
+							"\r",
+							"pm.test(\"ChargerTypes have unique IDs\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    const chargerTypes = jsonData.ChargerTypes;\r",
+							"    const ids = chargerTypes.map(charger => charger.ID);\r",
+							"    \r",
+							"    pm.expect(isADuplicate(ids)).to.equal(false);\r",
+							"\r",
+							"   \r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}referencedata/?key=9bb03e5b-0fb2-4916-9b2b-26c6bd27a56a",
+					"host": [
+						"{{baseURL}}referencedata"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "9bb03e5b-0fb2-4916-9b2b-26c6bd27a56a"
+						}
+					]
+				}
 			},
 			"response": [
 				{
