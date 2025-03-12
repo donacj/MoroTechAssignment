@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="OpenChargeMapAPI" tests="2" time="1.806">
+  <testsuite name="Get POIs" id="b3acc9e6-1357-4021-a192-c20da65781a9" timestamp="2025-03-12T21:57:12.146Z" tests="7" failures="1" errors="0" time="1.433">
+    <testcase name="Response status code is 200" time="1.433" classname="GetPoIs"/>
+    <testcase name="Content type is application/json" time="1.433" classname="GetPoIs"/>
+    <testcase name="Response time is less than 1000ms" time="1.433" classname="GetPoIs">
+      <failure type="AssertionFailure" message="expected 1433 to be below 1000">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: b7c7adbb-e875-4370-873c-46c09e209776.]]>
+        <![CDATA[Collection name: OpenChargeMapAPI.]]>
+        <![CDATA[Request name: Get POIs.]]>
+        <![CDATA[Test description: Response time is less than 1000ms.]]>
+        <![CDATA[Error message: expected 1433 to be below 1000.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1433 to be below 1000
+   at Object.eval sandbox-script.js:3:1).]]>
+      </failure>
+    </testcase>
+    <testcase name="Response data contains an array of POI objects" time="1.433" classname="GetPoIs"/>
+    <testcase name="Each POI contains mandatory fields ID, AddressInfo, NumberOfPoints" time="1.433" classname="GetPoIs"/>
+    <testcase name="Response contains an array of 5 POI objects" time="1.433" classname="GetPoIs"/>
+    <testcase name="POIs are within 10km of specific coordinates" time="1.433" classname="GetPoIs"/>
+  </testsuite>
+  <testsuite name="Get Reference data" id="33444ff1-59e6-4adb-9d11-f24f286b409a" timestamp="2025-03-12T21:57:12.146Z" tests="12" failures="0" errors="0" time="0.373">
+    <testcase name="Response status code is 200" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Content type is application/json" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response time is less than 1000ms" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of ChargerTypes with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of StatusTypes with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of CheckinStatusTypes with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of ConnectionTypes with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of CurrentTypes with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of DataProviders with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="Response contains array of Operators with ID and Title fields" time="0.373" classname="GetReferenceData"/>
+    <testcase name="ChargerTypes contains objects with IsFastChargeCapable true and false" time="0.373" classname="GetReferenceData"/>
+    <testcase name="StatusTypes have unique IDs" time="0.373" classname="GetReferenceData"/>
+  </testsuite>
+</testsuites>
