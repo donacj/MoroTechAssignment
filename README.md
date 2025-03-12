@@ -131,62 +131,61 @@ Alternatively the repository may be downloaded as a zip and then extracted.
 ### Running with Newman (Command Line)
 #### Prerequisites
 1.  **Install node.js:**
+
 Download and Install Node.js from https://nodejs.org/en/download for your operating system.
 
 2.  **Install Newman:**
+
 After installing node.js install newman:
 ```bash
 npm install -g newman
 ```
 Refer to https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman/ for detailed instruction.
+
 3. **API-key**
 
 An API key is required for all requests. Include it as a query parameter: 
 ?key=YOUR_API_KEY 
-To get a valid api key visit the Web URL and inspect the API calls triggered. On the request headers of the 
-API calls pointing to the above base url you will find a valid Api key to use for your requests 
-This API key has to be entered in the moroTech.postman_envioronment.json in the Environment folder as the value for the key 'variable_key'.
+ To get a valid api key visit the Web URL https://map.openchargemap.io/#/search and inspect the API calls triggered. On the request headers of the API calls pointing to the above base url you will find a valid Api key to use for your requests. This API key has to be entered in the moroTech.postman_envioronment.json in the Environment folder as the value for the key 'variable_key'.
+ ![image](https://github.com/user-attachments/assets/6b99812d-b592-4803-a41d-bba6ccb70238)
+
 
 5.  **Run the collection**
+
 Open a terminal in the cloned folder (or the extracted folder) and execute the following command to run the test cases.
 
 ```bash
-newman run Collection/OpenChargeMapAPI.postman_collection.json -e Environment/moroTech.postman_environment.json -r cli,junit -d Dataset/data.json 
+newman run Collection/OpenChargeMapAPI.postman_collection.json -e Environment/moroTech.postman_environment.json -r cli,junit --reporter-junit-export ./Report -d Dataset/data.json 
 ```
 
-This command will run the collection OpenChargeMapAPI.postman_collection.json on the dataset specified by data.json using the environment variables specified in moroTech.postman_environment.json. A junit xml report will be generated in the fodler Report. A cli report also can be viewed on the terminal. 
-    
- #### Importing into Postman:
+This command will run the collection ```OpenChargeMapAPI.postman_collection.json``` on the dataset specified by ```data.json``` using the environment variables specified in ```moroTech.postman_environment.json```. A junit xml report will be generated in the folder ```Report```. A cli report also can be viewed on the terminal. 
 
-1.  Download the collection file - `OpenChargeMapAPI.postman_collection.json` ( inside collection folder).
-2.  Download the environmrnt file -  (`MoroTech.postman_environment.json`)
-3.  Open Postman.
-4.  Click the "Import" button.
-5.  Select "File" and choose the downloaded JSON file.
-6.  Import the environment file as well.
-7.  Ensure that API key is added to the environment variables.
-8.  Run the collection within Postman.
+6. **Dataset**
+
+The dataset specified by Dataset/data.json contains the parameters to test the Get POIs endpoint. These are `latitude, longitude, distance, and maxresults`. This file may be edited to change query parameters.
       
 ## Analysis of Test Results and Observations
 
 #### Get POIs 
-* Verified that Status code is 200 consistantly, **Response time is not always under the limit 1000ms.**
-* Schema validation: Ensured fields('ID','AddressInfo','NumberOfPoints') are present in response payload.
-* Verified that when specifying 'maxresult' as 5, it returns 5 POIs details.
-* Verified that all POIs returned are within 10km from specified coordinates.**In some test runs 'AddressInfo.distance' returns null, and the test case is failing.**
+Dataset used for the test run is latitude=51.5074&longitude=0.1278&distance=10&maxresults=5
+
+* Status code: Testcase to verify if status code is 200 always passes.
+* Response time: **Testcase to verify if the response time is under the limit of 1000ms does not pass consistently**
+* Schema validation: Testcase to verify if the fields('ID','AddressInfo','NumberOfPoints') are present in response payload always passes.
+* Maxresults validation: Testcase to verify the number of results when specifying 'maxresult' as 5 always passes.
+* Distance validation: Testcase to verify that all POIs returned are within 10km from specified coordinates always passes.
 #### Get referrence Data
-* Verified that Status code is 200 consistantly and response time consistantly comes under 1000ms.
-* Schema validation: Ensured the response payload contains arrays of referrence data types like ChargerTypes, StatusTypes, Connectiontypes, Operators, UserTypes etc.
-* Verified that ChargerTypes array contains entries for both 'fast' and 'slow' chargers.
-* Veriifed thay all the statusType have unique ID.
+* Status code:Testcase to verify if status code is 200 always passes.
+* Response time: Testcase to verify if repsonse time under the limit of 1000ms always passes.
+* Schema validation: Testcase to verify if the response payload contains arrays of referrence data types like ChargerTypes, StatusTypes, Connectiontypes, Operators, UserTypes etc always passes.
+* Buisiness logic: Testcase to verify that ChargerTypes array contains entries for both 'fast' and 'slow' chargers always passes.
+* Buisiness logic: Testcase to verify that all the statusType have unique ID.
 #### Assumptions and Limitations
-* API response time slightly grater than acceptable threshold time to time, it can be due to performance bottleneck.
-* API functionalities mostly works: return currect status code, response data inthe expected format, including expected arrays and fields in the response.
-* **Assumption:** Assumed that 'AddressInfo.distance' provide the distance from the reference point. Used this value to verify the POIs are within the 10km limit.
+* **Assumption:** Assumed that 'AddressInfo.distance' always provides the distance from the reference point and is never null. This value is used to verify the POIs are within the 10km limit.
 * **Limitations:**
-* Limited test coverage for 'Get Referrence Data' end point (e.g., not checking for specific chargerTypes, not validating all type of refference data types).
-* Collection does not include tests for -ve scenarios like 'invalid API key', 'rate limlting' for identifying issues with APIs error handling
-* Collection does not include tests for  expected error status codes and response bodies.
+* Limited test coverage for 'Get Referrence Data' end point (e.g., not checking for specific chargerTypes, not validating all type of reference data types).
+* Collection does not include tests for -ve scenarios like 'invalid API key', 'rate limiting', and 'identifying issues with APIs error handling'.
+* Collection does not include tests for expected error status codes and response bodies.
 * The distance verification test relies on the AddressInfo.Distance property returned by the API. It doesn't perform independent distance calculations to ensure the API's distance values are accurate.(Improvement: If precise distance verification is crucial, implement own distance calculation logic and compare it with the API's results.) 
  
 
