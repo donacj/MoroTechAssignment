@@ -107,7 +107,7 @@ Refer https://openchargemap.org/site/develop/api#/operations/get-poi for details
       
 ## Import and Run
 
-* Newman maybe used for running the collection and/or postman may be used for both viewing and running the collection.
+* Newman is to be used for running the postman collection.
 ### Importing
 * Clone the repository https://github.com/donacj/MoroTechAssignment.git
   
