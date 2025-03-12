@@ -80,7 +80,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}poi/?latitude={{x}}&longitude={{y}}&distance={{}d}&maxresults={{n}}&key={{variable_key}}",
+					"raw": "{{baseURL}}poi/?latitude={{x}}&longitude={{y}}&distance={{d}}&maxresults={{n}}&key={{variable_key}}",
 					"host": [
 						"{{baseURL}}poi"
 					],
@@ -98,7 +98,7 @@
 						},
 						{
 							"key": "distance",
-							"value": "{{}d}"
+							"value": "{{d}}"
 						},
 						{
 							"key": "maxresults",
