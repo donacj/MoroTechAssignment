@@ -119,11 +119,11 @@ Alternatively the repository may be downloaded as a zip and then extracted.
 #### Folder Structure
 ```
     .
-    ├── Collection                 # Compiled files (alternatively `dist`)
-    ├── Environment                # Documentation files (alternatively `doc`)
-    ├── Report                     # Source files (alternatively `lib` or `app`)
-    ├── Dataset                    # Automated tests (alternatively `spec` or `tests`)
-    └── README.md
+    ├── Collection                 # postman collection.
+    ├── Environment                # environment variables.
+    ├── Report                     # report folder.
+    ├── Dataset                    # contains the data set.
+    └── README.md                  # this file.
 ```
 ### Running with Newman (Command Line)
 #### Prerequisites
