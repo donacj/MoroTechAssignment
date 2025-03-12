@@ -83,7 +83,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}poi/?latitude=51.5074&longitude=0.1278&distance=10&maxresults=5&key=9bb03e5b-0fb2-4916-9b2b-26c6bd27a56a",
+					"raw": "{{baseURL}}poi/?latitude={{x}}&longitude={{y}}&distance={{d}}&maxresults={{n}}&key=9bb03e5b-0fb2-4916-9b2b-26c6bd27a56a",
 					"host": [
 						"{{baseURL}}poi"
 					],
@@ -93,19 +93,19 @@
 					"query": [
 						{
 							"key": "latitude",
-							"value": "51.5074"
+							"value": "{{x}}"
 						},
 						{
 							"key": "longitude",
-							"value": "0.1278"
+							"value": "{{y}}"
 						},
 						{
 							"key": "distance",
-							"value": "10"
+							"value": "{{d}}"
 						},
 						{
 							"key": "maxresults",
-							"value": "5"
+							"value": "{{n}}"
 						},
 						{
 							"key": "key",

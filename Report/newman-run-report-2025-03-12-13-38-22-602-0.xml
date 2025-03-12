@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="OpenChargeMap API" tests="6" time="4.685">
+  <testsuite name="Get POIs" id="c68dbd1d-53f2-4852-b05c-a5d27570f718" timestamp="2025-03-12T13:38:16.870Z" tests="6" failures="2" errors="0" time="0.855">
+    <testcase name="Response status code is 200" time="0.650" classname="GetPoIs"/>
+    <testcase name="Content type is application/json" time="0.650" classname="GetPoIs"/>
+    <testcase name="Response time is less than 1000ms" time="0.650" classname="GetPoIs"/>
+    <testcase name="Response data contains an array of POI objects" time="0.650" classname="GetPoIs"/>
+    <testcase name="Response contains an array of 5 POI objects" time="0.650" classname="GetPoIs"/>
+    <testcase name="POIs are within 10km of specific coordinates" time="0.650" classname="GetPoIs"/>
+  </testsuite>
+  <testsuite name="Get Reference data" id="151e4596-4a6d-4a10-8f33-7b240fb83912" timestamp="2025-03-12T13:38:16.870Z" tests="12" failures="0" errors="0" time="0.706">
+    <testcase name="Response status code is 200" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Content type is application/json" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response time is less than 1000ms" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of ChargerTypes with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of StatusTypes with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of CheckinStatusTypes with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of ConnectionTypes with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of CurrentTypes with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of DataProviders with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="Response contains array of Operators with ID and Title fields" time="0.692" classname="GetReferenceData"/>
+    <testcase name="ChargerTypes contains objects with IsFastChargeCapable true and false" time="0.692" classname="GetReferenceData"/>
+    <testcase name="ChargerTypes have unique IDs" time="0.692" classname="GetReferenceData"/>
+  </testsuite>
+</testsuites>

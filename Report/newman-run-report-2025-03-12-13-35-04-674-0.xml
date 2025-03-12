@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="OpenChargeMap API" tests="4" time="3.135">
+  <testsuite name="Get POIs" id="d98c07e5-dddc-413d-8559-4498a173dd88" timestamp="2025-03-12T13:35:00.817Z" tests="6" failures="4" errors="0" time="0.826">
+    <testcase name="Response status code is 200" time="0.614" classname="GetPoIs"/>
+    <testcase name="Content type is application/json" time="0.614" classname="GetPoIs"/>
+    <testcase name="Response time is less than 1000ms" time="0.614" classname="GetPoIs"/>
+    <testcase name="Response data contains an array of POI objects" time="0.614" classname="GetPoIs"/>
+    <testcase name="Response contains an array of 5 POI objects" time="0.614" classname="GetPoIs">
+      <failure type="AssertionFailure" message="expected [ { DataProvider: { …(10) }, …(30) } ] to have a length of 5 but got 1">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: b7c7adbb-e875-4370-873c-46c09e209776.]]>
+        <![CDATA[Collection name: OpenChargeMap API.]]>
+        <![CDATA[Request name: Get POIs.]]>
+        <![CDATA[Test description: Response contains an array of 5 POI objects.]]>
+        <![CDATA[Error message: expected [ { DataProvider: { …(10) }, …(30) } ] to have a length of 5 but got 1.]]>
+        <![CDATA[Stacktrace: AssertionError: expected [ { DataProvider: { …(10) }, …(30) } ] to have a length of 5 but got 1
+   at Object.eval sandbox-script.js:5:1).]]>
+      </failure>
+    </testcase>
+    <testcase name="POIs are within 10km of specific coordinates" time="0.614" classname="GetPoIs">
+      <failure type="AssertionFailure" message="expected null to be a number or a date">
+        <![CDATA[Failed 2 times.]]>
+        <![CDATA[Collection JSON ID: b7c7adbb-e875-4370-873c-46c09e209776.]]>
+        <![CDATA[Collection name: OpenChargeMap API.]]>
+        <![CDATA[Request name: Get POIs.]]>
+        <![CDATA[Test description: POIs are within 10km of specific coordinates.]]>
+        <![CDATA[Error message: expected null to be a number or a date.]]>
+        <![CDATA[Stacktrace: AssertionError: expected null to be a number or a date
+   at Object.eval sandbox-script.js:6:1).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Get Reference data" id="0b2dcded-16b9-4db9-9137-a0b6f366c184" timestamp="2025-03-12T13:35:00.817Z" tests="12" failures="0" errors="0" time="0.742">
+    <testcase name="Response status code is 200" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Content type is application/json" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response time is less than 1000ms" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of ChargerTypes with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of StatusTypes with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of CheckinStatusTypes with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of ConnectionTypes with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of CurrentTypes with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of DataProviders with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="Response contains array of Operators with ID and Title fields" time="0.753" classname="GetReferenceData"/>
+    <testcase name="ChargerTypes contains objects with IsFastChargeCapable true and false" time="0.753" classname="GetReferenceData"/>
+    <testcase name="ChargerTypes have unique IDs" time="0.753" classname="GetReferenceData"/>
+  </testsuite>
+</testsuites>
